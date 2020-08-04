@@ -1,0 +1,126 @@
+@font-face {
+    font-family: Arvo;
+    src: url(../fonts/Arvo/Arvo-Bold.ttf);
+}
+@font-face {
+    font-family: RobotoMono;
+    src: url(../fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: VarelaRound;
+    src: url(../fonts/Vareal_Round/VarelaRound-Regular.ttf);
+}
+@font-face {
+    font-family: Arvo;
+    src: url(../fonts/Arvo/Arvo-Bold.ttf);
+}
+a {
+    color: #5f9ea0;
+}
+a:hover {
+    text-decoration: none;
+}
+#main-bg-img {
+    overflow: hidden;
+    height: 300px;
+    background-image: url('../img/main/main-bg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: brightness(0.5) grayscale(45%);
+}
+#main-bg {
+    position: absolute;
+    top: 10%;
+    left: 0%;
+    width: 100%;
+}
+
+#main-filters {
+    color: #dcdcdc;
+}
+
+#main-filters h2 {
+    margin-bottom: 20px;
+}
+
+#main-filters ul {
+    padding: 0;
+    margin-left: 20%;
+    list-style: none;
+    display: flow-root;
+}
+
+#main-filters ul li {
+    float: left;
+    display: flex;
+    padding-right: 10px;
+    font-size: 20px;
+    transition: 0.3ms;
+}
+
+#main-filters .input-group {
+    margin-left: 20%;
+    width: 60%;
+}
+
+.bg-light {
+    background-color: #162447!important;
+}
+
+.nav-link {
+    color: #c3c3c3 !important;
+    padding: 10px !important;
+}
+.nav-item {
+    border: none;
+    margin-left: 5px;
+    border-radius: 4px;
+    transition: 0.3ms;
+}
+.nav-item:hover, .active {
+    background-color: #1f4068;
+}
+.navbar-brand {
+    color: #fff !important;
+}
+.divider-line {
+    border-bottom: solid #1b1b2f 2px;
+    display: inline-block;
+    width: 100%;
+    height: 25px;
+    font-weight: 700;
+    color: #1f4068;
+    text-transform: uppercase;
+    font-family: VarelaRound;
+    margin-bottom: 10px;
+}
+#main-title {
+    margin: 30px 0 50px 0;
+}
+#main-title h1 {
+    color: #fff;
+    font-size: 50px;
+    text-align: center;
+}
+#main-bg-content {
+    color: #fff;
+    text-align: center;
+}
+#main-tags-list {
+    text-align: center;
+}
+#main-tags-list ul {
+    list-style: none;
+}
+#OfferTitle {
+    text-align: center;
+    padding: 30px;
+}
+.OfferList ul {
+    list-style: none;
+}
+.card-body img {
+    width: 45px;
+    border-radius: 50%;
+}

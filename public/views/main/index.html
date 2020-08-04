@@ -1,0 +1,92 @@
+{% extends './default/default.html' %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 p-0">
+                <div id="main-bg-img"></div>
+                <div id="main-bg">
+                    <div id="main-title">
+                        <h1>TikToker</h1>
+                    </div>
+                    <div id="main-filters" class="col-md-12 p-0">
+                        <ul>
+                            <li><a href="#">#test</a></li>
+                            <li><a href="#">#test</a></li>
+                            <li><a href="#">#test</a></li>
+                            <li><a href="#">#test</a></li>
+                            <li><a href="#">#test</a></li>
+                            <li><a href="#">#test</a></li>
+                            <li><a href="#">#test</a></li>
+                        </ul>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 id="OfferTitle">What We Offer</h2>
+            </div>
+            <div class="col-sm-4">
+                <div class="OfferList">
+                    <ul>
+                        <li>asdasdasd</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="OfferList">
+                    <ul>
+                        <li>asdasdasd</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="OfferList">
+                    <ul>
+                        <li>asdasdasd</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12"></div>
+            <div class="col-md-2 mt-5"></div>
+            <div class="col-md-8 mt-5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <i class="divider-line">music</i>
+                        </div>
+                    </div>
+                    {% for item in MusicFeed[0] %}
+                        <div class="col-md-3 mt-5">
+                            <div class="card">
+                                <img class="card-img-top" src="{{ item.itemInfos.covers[0] }}" alt="Card image cap">
+                                <div class="card-body">
+                                    <div>
+                                        <img src="{{ item.authorInfos.covers[0] }}" alt="{{ item.authorInfos.signature }}">
+                                        <span>{{ item.authorInfos.signature }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-2 mt-5"></div>
+        </div>
+    </div>
+{% endblock %}
