@@ -4,16 +4,10 @@ const assigningKeys = require('../assigningKeys');
 
 class TikTokGlobal {
     uri = 'https://tiktok-global.p.rapidapi.com/'
-    UploadTo = "../public/assets/img/uploads/";
-
     urls = {
         'Music'   : `${this.uri}music/6822243166939368198`,
         'Hashtag' : `${this.uri}hashtag/info`
     }
-    uploads = {
-        "postCover" : `${this.UploadTo}postCoverImage/`,
-        "postVideo" : `${this.UploadTo}postVideos/`
-    };
     timeOut = {
         "Music"    : 20,
         "Trending" : 20,
@@ -31,6 +25,7 @@ class TikTokGlobal {
             video        : "videoMeta.urls[0]",
             shareCount   : null,
             commentCount : null,
+
         },
         "User" : {
             id             : null,
@@ -57,30 +52,13 @@ class TikTokGlobal {
 
     constructor ()  {}
 
-    autoFillPostDB (content={}, to='Post') {
-        if (Object.keys(content).length === 0) throw new Error('can\'t use empty object.');
-
-        let insertStyle = Object.keys(this.insertStyles[to]);
-        let count = 0;
-        let assigningKeys = new assigningKeys(this.insertStyles[to]);
-        let insertIterator = assigningKeys.ContentInsertStyleIterator(content, (content, key) => {
-            console.log(content);
-            console.log(key);
-        }).next(insertStyle[count]);
-        let currentPostContent = {};
-
-        while (insertIterator.done !== true) {
-            Object.assign(currentPostContent, insertIterator.value);
-            count++;
-            insertIterator = insertIterator.next(insertStyle[count]);
-        }
-
-        return currentPostContent;
+    autoFillPostDB (content=[], to='Post') {
+        return (new assigningKeys(this.insertStyles[to])).Iterate(content);
     }
 
     sendRequest (to, query) {
         let req = unrest('GET', this.urls[to]);
-        let timeOut = db.get('timeOut'); 
+        let timeOut = db.get('timeOut');
         this.db = timeOut;
 
         req.headers({
@@ -97,7 +75,7 @@ class TikTokGlobal {
             this.LastRequest(to);   
         });
 
-        return req;     
+        return req;
     }
 
     LastRequest (to) {
@@ -111,7 +89,7 @@ class TikTokGlobal {
         try {
             db.get('timeOut').findOne({'moduleName' : to}).then( (data) => {
 
-                if ( Math.abs(data.LastUpdate - ( new Date() )) / 8.64e7 > 20 ) {
+                if ( Math.abs(( new Date() ) - data.LastUpdate ) / 8.64e7 > 20 ) {
                     let Request = this.sendRequest(to, {
                         "maxCursor": "1",
                         "minCursor": "1"
@@ -121,7 +99,7 @@ class TikTokGlobal {
                         if (res.error) throw new Error(res.error);
 
                        let content = this.autoFillPostDB(res.body);
-
+                        console.log(content);
                        db.get(to).insert(content);
                        if (callBack !== null) callBack(content);
                     });
@@ -137,7 +115,9 @@ class TikTokGlobal {
     }
     
     MusicFeed (callBack) {
-        return this.Feed(callBack, 'Music')
+        return new Promise(() => {
+            this.Feed(callBack, "Music")
+        });
     }
 
     HashtagInfo (callBack) {

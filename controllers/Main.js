@@ -4,9 +4,7 @@ const {PostModal} = require('../modals/PostModal');
 
 class Main extends controller {
     static index (req, res) {
-        PostModal.musicFeed((data) => {
-            //console.log(data);
-        });
+        PostModal.musicFeed();
 
         let itemList = [];
         PostModal.renderView('main/index', res, {'MusicFeed': itemList});

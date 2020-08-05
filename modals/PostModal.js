@@ -3,7 +3,7 @@ const {TikTokGlobalApi} = require('../libs/Apis/TikTokGlobal');
 
 class PostModal extends Modal {
      musicFeed (callback) {
-         TikTokGlobalApi.MusicFeed(callback);
+         return TikTokGlobalApi.MusicFeed(callback);
      }
 }
 
