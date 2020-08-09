@@ -1,64 +1,30 @@
 const unrest = require('unirest');
 const db = require('monk')('localhost/TikTok');
 const assigningKeys = require('../assigningKeys');
+const dowuload = require('../../libs/download');
+const { music : ApiContent } = require('../../db/musicFeed');
 
 class TikTokGlobal {
     uri = 'https://tiktok-global.p.rapidapi.com/'
     urls = {
-        'Music'   : `${this.uri}music/6822243166939368198`,
-        'Hashtag' : `${this.uri}hashtag/info`
+        'Music'          : `${this.uri}music/`,
+        'Hashtag'        : `${this.uri}hashtag/feed`,
+        'HashtagInfo'    : `${this.uri}hashtag/info`,
+        "GlobalTranding" : `${this.uri}tranding`,
+        "UserInfo"       : `${this.uri}user/info`,
+        "Userfeed"       : `${this.uri}user/feed`
     }
     timeOut = {
-        "Music"    : 20,
-        "Trending" : 20,
-        "Hashtag"  : 20,
-        "User"     : 20
-    };
-    insertStyles = {
-        "Post" : {
-            id           : null,
-            text         : null,
-            creatTime    : null,
-            authorId     : null,
-            musicId      : null,
-            coverImage   : "covers.origin",
-            video        : "videoMeta.urls[0]",
-            shareCount   : null,
-            commentCount : null,
-
-        },
-        "User" : {
-            id             : null,
-            uniqeId        : null,
-            nikName        : null,
-            signature      : null,
-            verified       : null,
-            coverImage     : null,
-            followingCount : null,
-            followerCount  : null,
-            videoCount     : null,
-            heartCount     : null
-        },
-        "Music" : {
-            id             : null,
-            musicName      : null,
-            authorName     : null,
-            original       : null,
-            cover          : null,
-            music          : null
-        }
-    };
+        "default"  : 20
+    }
+    
     requestCount = 200; /* this will change based on requests count in mango */
 
     constructor ()  {}
 
-    autoFillPostDB (content=[], to='Post') {
-        return (new assigningKeys(this.insertStyles[to])).Iterate(content);
-    }
-
-    sendRequest (to, query) {
-        let req = unrest('GET', this.urls[to]);
-        let timeOut = db.get('timeOut');
+    SendRequest (to, query, urlAddon=null) {
+        let req = unrest('GET', this.urls[to] + (urlAddon === null ? "" : urlAddon));
+        let timeOut = db.get('Timeout');
         this.db = timeOut;
 
         req.headers({
@@ -68,76 +34,75 @@ class TikTokGlobal {
         });
 
         req.query(query);
-        
+
         timeOut.findOne({'moduleName' : to}).then((data)=> {
-            this.timeOut[to] = parseInt (data.FeedLimit)-1;
-            if (data.FeedLimit === 0) throw new Error('Limit is up');
-            this.LastRequest(to);   
+            if (data.feedLimit === 0) throw new Error('Limit is up');
+            this.LastRequest(to, parseInt(data.feedLimit)-1);   
         });
 
         return req;
     }
 
-    LastRequest (to) {
+    LastRequest (to, feedLimit) {
         this.db.findOneAndUpdate(
             { 'moduleName': to },
-            { $set: { 'FeedLimit': this.timeOut[to], 'LastUpdate': new Date ()}}
+            { $set: { 'feedLimit': feedLimit, 'lastUpdate': new Date ()}}
         );
     }
 
-    Feed (callBack=null, to) {
-        try {
-            db.get('timeOut').findOne({'moduleName' : to}).then( (data) => {
-
-                if ( Math.abs(( new Date() ) - data.LastUpdate ) / 8.64e7 > 20 ) {
-                    let Request = this.sendRequest(to, {
-                        "maxCursor": "1",
-                        "minCursor": "1"
-                    });
-
-                    Request.end((res) => {
-                        if (res.error) throw new Error(res.error);
-
-                       let content = this.autoFillPostDB(res.body);
-                        console.log(content);
-                       db.get(to).insert(content);
-                       if (callBack !== null) callBack(content);
-                    });
-                } else {
-                    db.get(to).find({}).then((data) => {
-                        if (callBack !== null) callBack(data);
-                    });
-                }
-            });
-        } catch (error) {
-            throw new Error(error);
-        }
-    }
-    
-    MusicFeed (callBack) {
-        return new Promise(() => {
-            this.Feed(callBack, "Music")
+    InsertTimeout (to) {
+        db.get('Timeout').insert({
+            "moduleName" : to, 
+            "lastUpdate" : new Date(),
+            "feedLimit"  : this.timeOut.default
         });
     }
 
-    HashtagInfo (callBack) {
-        this.Feed(callBack, 'Hashtag')
-    }
+    Feed (to, query, forseUpdate=null, urlAddon=null) {
+        try {
+            db.get('Timeout').findOne({'moduleName' : to}).then( (data) => {
+                if ( Math.abs(( new Date() ) - data.lastUpdate ) / 8.64e7 > 20 || forseUpdate !== null ) {
+                    let Request = this.SendRequest(to, query, urlAddon);
+                    
+                    Request.end((res) => {
+                        if (res.error) throw new Error(res.error);
+                        if (res.body.errors) throw new Error(res.body.errors);
 
-    Tranding () {
-        
-    }
+                        if (res.body.data.items !== undefined && res.body.data.items !== null) {
+                            res.body.data.items.forEach((item) => {
+                                db.get(to).insert(item);
+                            });
+                        } else if (res.body.data.body !== undefined && res.body.data.body.itemListData !== undefined && res.body.data.body.itemListData !== null) {
+                            res.body.data.body.itemListData.forEach((item) => {
+                                item.itemInfos.covers[0] = dowuload.cover (item.itemInfos.covers[0]);
+                                item.itemInfos.video.urls[0] = dowuload.videos (item.itemInfos.video.urls[0]);
+                                item.authorInfos.covers[0] = dowuload.userCovers (item.authorInfos.covers[0]);
+                                //item.itemInfos.shareCover[1] = dowuload.coverGif(item.itemInfos.shareCover[1]);
+                                //item.musicInfos.playUrl[0] = dowuload.music(item.musicInfos.playUrl[0]);
+                                
+                                db.get(to).insert(item);
+                            });
+                        } else if (res.body.data !== undefined && res.body.data.itemListData !== undefined) {
+                            res.body.data.itemListData.forEach((item) => {
+                                db.get(to).insert(item);
+                            });
+                        } else if (res.body.data !== undefined && res.body.data.userInfo !== undefined) {
+                            res.body.data.userInfo.user.avatarMedium = dowuload.userCovers (res.body.data.userInfo.user.avatarMedium);
+                            db.get(to).insert(res.body.data.userInfo);
+                        } else {
+                            db.get(to).insert(res.body);
+                        }
 
-    HashtagFeed () {
-
-    }
-
-    UserInfo () {
-
-    }
-
-    UserFeed () {
-
+                    });
+                }
+            }).catch((e) => {
+                this.InsertTimeout(to);
+                console.error(e);
+            });
+            return db.get(to).find({});
+        } catch (error) {
+            throw new Error(error);
+        }
     }
 }
 

@@ -32,5 +32,8 @@
     "randomstring": "^1.1.5",
     "twing": "^5.0.2",
     "unirest": "^0.6.0"
+  },
+  "devDependencies": {
+    "lint": "^0.7.0"
   }
 }

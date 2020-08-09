@@ -1,4 +1,4 @@
-const {Main} = require('../controllers/Main');
+const Main = require('../controllers/Main');
 const express = require('express');
 const Router = express();
 
