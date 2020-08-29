@@ -1,0 +1,48 @@
+{% extends "./default/default.html" %}
+{% block head %}
+    <title>Search</title>
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="ad"></div>
+            </div>
+            <div class="col-md-8"> 
+                <div class="search">
+                    <h1 class="text-center mt-5 mb-2">Search Your Tags</h1>
+                     
+                        <h4 class="mt-5">Videos</h4>
+                        <hr />
+                        <div class="row videos mb-5">
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <div class="card">
+                                    <a href="/post/{{ item.itemInfos.id }}">
+                                        <img class="card-img-top" src="../uploads/CoversImages/PgaKKtuaPP.jpeg" alt="{{ item.authorInfos.signature }}">
+                                    </a>
+    
+                                   <div class="card-body">
+                                       <div class="card-user">
+                                            <a href="/user/{{ item.authorInfos.userId }}">
+                                                <img src="../uploads/UserCoversImages/6kM8NbAAdS.jpeg" alt="{{ item.authorInfos.signature }}">
+                                                <span>asdasdasd asd asda s</span>
+                                            </a>
+                                       </div>
+                                       <div class="card-text">
+                                            <a href="/post/{{ item.itemInfos.id }}">
+                                                asdasdasd asd asd asd
+                                            </a>
+                                       </div>
+                                   </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="ad"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

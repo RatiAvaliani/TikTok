@@ -14,21 +14,28 @@
     font-family: Arvo;
     src: url(../fonts/Arvo/Arvo-Bold.ttf);
 }
+*{
+    font-family: 'Share Tech Mono', monospace;
+}
 a {
     color: #5f9ea0;
 }
 a:hover {
     text-decoration: none;
 }
+main {
+    background-color: #e1e1e1;
+}
 #main-bg-img {
     overflow: hidden;
-    height: 300px;
+    height: 40ch;
     background-image: url('../img/main/main-bg.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     filter: brightness(0.5) grayscale(45%);
 }
+
 #main-bg {
     position: absolute;
     top: 10%;
@@ -78,7 +85,7 @@ a:hover {
     border-radius: 4px;
     transition: 0.3ms;
 }
-.nav-item:hover, .active {
+.nav-item:hover, .nav-item.active {
     background-color: #1f4068;
 }
 .navbar-brand {
@@ -122,5 +129,279 @@ a:hover {
 }
 .card-body img {
     width: 45px;
+    float: left;
+    border-radius: 5%;
+    margin-right: 15px;
+}
+.card-user {
+    border-bottom: 1px solid #808080;
+    text-align: center;
+    padding-bottom: 5px;
+}
+.card-user span {
+    color: #cc5e5e;
+}
+.card-body{ 
+    padding-top: 10px;
+}
+.card-text a {
+    position: relative;
+    top: 5px;
+    font-family: VarelaRound;
+}
+
+/* Posts */
+
+.post {
+    padding-left: 35px;
+    padding-bottom: 50px;
+}
+
+.post h1 {
+    padding: 25px 0 25px 0;
+}
+
+.post .post-info {
+    background-color: #f5f5f5;
+    width: 100%;
+    border-radius: 1%;
+    display: flex;
+    margin: 0 20px 20px 20px;
+}
+
+.post .post-content {
+    width: 100%;
+    max-height: 600px;
+    border-bottom-left-radius: 1%;
+    border-top-left-radius: 1%;
+}
+
+.post .user-card {
+    position: relative;
+    padding-left: 5px;
+}
+
+.post .user-card img {
+    position: relative;
     border-radius: 50%;
+    top: 10px;
+    width: 60px;
+}
+
+.post .user-card-name {
+    top: 15px;
+    position: relative;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.post .user-card-link {
+    top: 15px;
+    font-size: 20px;
+    position: relative;
+    
+}
+
+.post .user-card-link a {
+    color: #de3131;
+}
+
+.post .user-card-post-comment {
+    position: relative;
+    top: 20px;
+    padding-top: 5px;
+    border-top: 1px solid #bdbdbd;
+    font-size: 18px;
+}
+
+.post .user-card-post-comment ul {
+    padding: 0;
+}
+
+.post .user-card-post-count {
+    display: inline-flex;
+    position: relative;
+    top: 20px;
+    left: -5px;
+}
+
+.post .user-card-post-count ul {
+    padding: 0;
+}
+
+.post .user-card-post-count ul li {
+    position: relative;
+    list-style: none;
+    float: left;
+    margin-left: 5px;
+}
+
+.post .user-card-post-shear ul {
+    list-style: none;
+}
+
+.post .user-card-post-shear ul li {
+    float: left;
+}
+
+.post .user-card-post-add-date {
+    float: right;
+    right: 0;
+    top: 20px;
+    position: relative;
+    display: inline-flex;
+}
+
+.post .comments {
+    background-color: #f5f5f5;
+    position: relative;
+    border-radius: 1%;
+    width: 100%;
+    margin: 0 20px;
+    max-height: 47.7vh;
+    overflow-x: auto;
+}
+
+.post .comments .comment-title {
+    text-align: center;
+    background-color: #bdbdbd;
+    border-radius: 1%;
+}
+ 
+.post .comments ul {
+    text-align: center; 
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    list-style: none;
+    padding: 0;
+}
+
+.post .comments ul li {
+    border-bottom: solid 1px;
+    height: 80px;
+    margin-top: 20px;
+    position: relative;
+}
+
+.post .comments ul .user-card-image img {
+    width: 100%;
+    border-radius: 50%;
+    position: relative;
+}
+
+.post .comments ul .user-card-image {
+    width: 60px;
+    float: left;
+    position: initial;
+    margin-left: 10px;
+    border-radius: 50%;
+}
+
+.comments .user-card-name {
+    top: -10px;
+    right: 10px;
+    font-size: 20px;
+}
+
+/* carousel */
+
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+    background: #162447!important;
+}
+
+/* search */
+.search {
+    position: relative;
+}
+
+.search .search-tags {
+    position: relative;
+    left: -40px;
+    bottom: 5px;
+    height: 25px;
+}
+
+.search .search-tags ul {
+    list-style: none;
+}
+
+.search .search-tags ul li {
+    float: left;
+    margin-right: 10px;
+}
+
+.search .search-user-list .item {
+    border: solid gray 1px;
+    background-color: #f5f5f5;
+    display: inline-flex;
+    padding: 10px;
+    box-shadow: 5px 5px 10px #b3b3b3;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.search .search-user-list .item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: inline-flex;
+}
+
+.search .search-user-list .item .name {
+  
+    display: inline-flex;
+}
+
+.search .search-user-list .item .harts-count, .search .search-user-list .item .video-count {
+    display: flex;
+}
+
+.search .search-user-list .item .harts-count {
+    color: #565656;
+}
+
+.search .search-user-list .item .video-count {
+    color: #565656;
+}
+
+.search .search-user-list .item .harts-count span, .search .search-user-list .item .video-count span {
+    margin-top: -4px;
+    margin-left: 4px;
+    color: #565656;
+}
+
+.search .search-user-list .item .search-user-count {
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+/* Slider */
+
+.owl-carousel {
+    position: relative;
+    margin-top: 30px;
+}
+.owl-nav {
+    position: absolute;
+    top: -60px;
+    left: 10px;
+}
+.uk-card-primary {
+    border-radius: 8px;
+}
+.uk-card > :last-child {
+    margin-top:0;
+    margin-bottom: 10px
+}
+.owl-next {
+    background: #3286f0;
+}
+.owl-theme .owl-nav [class*='owl-'] {
+    background: #383838;
+}
+.owl-dots {
+    margin-top: 30px;
+}
+.uk-card-title {
+    padding-bottom: 20px
 }

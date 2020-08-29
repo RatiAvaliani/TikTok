@@ -1,5 +1,6 @@
 const Modal = require('./Modal');
 const {TikTokGlobalApi: Api} = require('../libs/Apis/TikTokGlobal.js');
+const db = require('monk')('localhost/TikTok');
 
 class User extends Modal {
     feed (username) {
@@ -13,6 +14,10 @@ class User extends Modal {
         return Api.Feed('UserInfo', {
             "user_name" : username
         });
+    }
+
+    topList () {
+        return db.get('TopPosts').find({});
     }
 }
 

@@ -4,17 +4,19 @@ const db = require('monk')('localhost/TikTok');
 
 class Hashtag extends Modal {
     collection = {
-        "Hashtag" : "Hashtag",
-        "Tags"    : "Tags"
+        "Hashtag"    : "HashtagFeed",
+        "TagedPosts" : "TagedPosts",
+        "Tags"       : "Tags",
+        "TopPosts"   : "TopPosts"
     };
 
     searchTag (tag, cursor) {
-        return Api.Feed('Hashtag', {
+        return Api.Feed('HashtagFeed', {
             "count": "1000",
             "tag_name" : tag, 
             "minCursor": cursor[0],
             "maxCursor": cursor[1]
-        },true);
+        }, true);
     }
 
     inti (tag) {
@@ -27,21 +29,12 @@ class Hashtag extends Modal {
         return db.get(this.collection.Hashtag).find({});
     }
 
-    set filter (tag) {
-        let cont = db.get(collection.Hashtag).find({}, { fields: { "itemInfos.text" : tag } });
-        if (cont.lenght === 0) {
-            this.info(tag);
-        }
-
-        return cont;
+    get topList () {
+        return db.get(this.collection.TopPosts).find({});
     }
 
-    get mainTags () {
-        return db.get(this.collection.Tags).find({}, {limit : 10});
-    }
-
-    get randomTags () {
-        return db.get(this.collection.Hashtag).find({});
+    get tagList () {
+        return db.get(this.collection.TagedPosts).find({});
     }
 }
 

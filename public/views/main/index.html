@@ -1,7 +1,5 @@
 {% extends './default/default.html' %}
-{% block head %}
-    <link rel="stylesheet" type="text/css" href="../css/main.css">
-{% endblock %}
+{% block head %} <title>Home</title> {% endblock %}
 {% block content %}
     <div class="container-fluid">
         <div class="row">
@@ -17,12 +15,13 @@
                                 <li><a href="/hashtag/{{ tag.tag }}">#{{ tag.tag }}</a></li>
                             {% endfor %}
                         </ul>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control">
+                      
+                        <form class="input-group mb-3" action="/hashtag/" method="get">
+                            <input type="text" class="form-control" placeholder="#tiktok #love #funny">
                             <div class="input-group-append">
-                                <button class="btn" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                <button class="btn" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
-                        </div>
+                        </form> 
                     </div>
                 </div>
             </div>
@@ -33,12 +32,8 @@
             <div class="col-sm-12">
                 <h2 id="OfferTitle">What We Offer</h2>
             </div>
-            <div class="col-sm-4">
-                <div class="OfferList">
-                    <ul>
-                        <li>Lates Feed</li>
-                    </ul>
-                </div>
+            <div class="col-sm-12">
+                Here you can see what other TikTok users are up to if you want to have login free interaction with TikTok, This Tiktok web viewer will provide quality content, here you can download cover images an videos for personal use, you can see and search comments on a post.
             </div>
         </div>
     </div>
@@ -48,23 +43,47 @@
             <div class="col-md-2 mt-5"></div>
             <div class="col-md-8 mt-5">
                 <div class="row">
+                    <h4 class="mt-5">User</h4>
+                        <hr />
+                        <div class="search-user-list">
+                            <div class="item col-md-2">
+                                <div>
+                                    <img src="../uploads/UserCoversImages/6kM8NbAAdS.jpeg" alt="">
+                                    <span class="name">my name</span>
+                                </div>
+                                <div class="search-user-count">
+                                    <span class="harts-count"><i class="fa fa-heart" aria-hidden="true"></i> <span>100k</span></span>
+                                    <span class="video-count"><i class="fa fa-comments" aria-hidden="true"></i> <span>50k</span></span>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="row">
                     <div class="col-md-12">
                         <div class="row">
                             <i class="divider-line">music</i>
                         </div>
                     </div>
                     {% for item in Hashtags %}
-                        <div class="col-md-3 mt-5">
+                        <div class="col-sm-12 col-md-6 col-lg-3 mt-5">
                             <div class="card">
-                                <a href="">
-                                    <img class="card-img-top" src="{{ item.itemInfos.covers[0] }}" alt="Card image cap">
-                                    <div class="card-body">
-                                        <div>
-                                            <img src="{{ item.authorInfos.covers[0] }}" alt="{{ item.authorInfos.signature }}">
-                                            <span>{{ item.authorInfos.signature }}</span>
-                                        </div>
-                                    </div>
+                                <a href="/post/{{ item.itemInfos.id }}">
+                                    <img class="card-img-top" src="../uploads/Images/{{ item.itemInfos.shareCover }}" alt="{{ item.authorInfos.signature }}">
                                 </a>
+
+                               <div class="card-body">
+                                   <div class="card-user">
+                                        <a href="/user/{{ item.authorInfos.userId }}">
+                                            <img src="../uploads/Images/{{ item.authorInfos.coversMedium }}" alt="{{ item.authorInfos.signature }}">
+                                            <span>{{ item.authorInfos.nickName }}</span>
+                                        </a>
+                                   </div>
+                                   <div class="card-text">
+                                        <a href="/post/{{ item.itemInfos.id }}">
+                                            {{ item.itemInfos.text }}
+                                        </a>
+                                   </div>
+                               </div>
                             </div>
                         </div>
                     {% endfor %}

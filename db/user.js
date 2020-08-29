@@ -1,0 +1,133 @@
+module.exports.user = {
+    "apple_account":0,
+    "avatar_168x168":{
+    "uri":"musically-maliva-obj/1666108431671302",
+    "url_list": [
+            "https://p16-va-tiktok.ibyteimg.com/img/musically-maliva-obj/1666108431671302~c5_168x168.webp"
+        ]
+    },
+    "avatar_300x300":{
+    "uri":"musically-maliva-obj/1666108431671302",
+    "url_list" : [
+            "https://p16-va-tiktok.ibyteimg.com/img/musically-maliva-obj/1666108431671302~c5_300x300.webp"
+        ]
+    },
+    "avatar_larger":{
+    "uri":"musically-maliva-obj/1666108431671302",
+    "url_list":[
+            "https://p16-va-tiktok.ibyteimg.com/img/musically-maliva-obj/1666108431671302~c5_1080x1080.webp"
+        ]
+    },
+    "avatar_medium":{
+    "uri":"musically-maliva-obj/1666108431671302",
+    "url_list":[
+            "https://p16-va-tiktok.ibyteimg.com/img/musically-maliva-obj/1666108431671302~c5_720x720.webp"
+        ]
+    },
+    "avatar_thumb":{
+    "uri":"musically-maliva-obj/1666108431671302",
+    "url_list":[
+           "https://p16-va-tiktok.ibyteimg.com/img/musically-maliva-obj/1666108431671302~c5_100x100.webp"
+        ]
+    },
+    "aweme_count":735,
+    "birthday":"1900-01-01",
+    "birthday_hide_level":0,
+    "city":"",
+    "commerce_user_info":{
+        "has_ads_entry":false
+    },
+    "commerce_user_level":0,
+    "country":"",
+    "cover_url":[
+        {
+            "uri":"musically-maliva-obj/1612555907887110",
+            "url_list":[
+                "https://p16-va-tiktok.ibyteimg.com/obj/musically-maliva-obj/1612555907887110"
+            ]
+        }
+    ],
+    "custom_verify":"Popular creator",
+    "district":"",
+    "dongtai_count":735,
+    "enterprise_verify_reason":"",
+    "favoriting_count":0,
+    "follow_status":0,
+    "follower_count":28949672,
+    "follower_status":0,
+    "following_count":138,
+    "forward_count":0,
+    "gender":0,
+    "ins_id":"brentrivera",
+    "is_activity_user":false,
+    "is_block":false,
+    "is_blocked":false,
+    "is_effect_artist":false,
+    "is_star":false,
+    "iso_country_code":"",
+    "live_commerce":false,
+    "location":"",
+    "message_chat_entry":false,
+    "mplatform_followers_count":0,
+    "nickname":"Brent Rivera",
+    "original_musician":{
+        "digg_count":0,
+        "music_count":0,
+        "music_used_count":0,
+    },
+    "profile_tab_type":0,
+    "province":"",
+    "recommend_reason_relation":"",
+    "recommend_user_reason_source":0,
+    "room_id":0,
+    "sec_uid":"MS4wLjABAAAA1gCKyeau9hv6A32fGuGVS2Da9oeYnIWcqLK_nlH0UHM",
+    "secret":0,
+    "share_info":{
+    "bool_persist":1,
+        "share_desc":"Check out Brent Rivera! #TikTok",
+        "share_image_url":{
+            "uri":"tos-maliva-p-0068/26990e6f354d4e3d946fab592f3d0319_1592201766",
+            "url_list":[
+                "https://p16-tiktok-va.ibyteimg.com/obj/tos-maliva-p-0068/26990e6f354d4e3d946fab592f3d0319_1592201766?x-expires=1592244000&x-signature=Brh8074aTCmFWkZCLkJYE4oADc0%3D"
+            ]
+        },
+        "share_qrcode_url":{
+            "uri":"",
+            "url_list":[]
+        },
+        "share_title":"Join TikTok and see what I've been up to!",
+        "share_title_myself":"This TikTok app is soooooo fun! Follow me @brentrivera on TikTok and check out my videos!",
+        "share_title_other":"This TikTok user is really cool. Follow @brentrivera on TikTok and check out those amazing videos!",
+        "share_url":"https://m.tiktok.com/h5/share/usr/7445731.html?_d=dc7llgi81j4lda&language=en&sec_uid=MS4wLjABAAAA1gCKyeau9hv6A32fGuGVS2Da9oeYnIWcqLK_nlH0UHM&share_author_id=7445731",
+        "share_weibo_desc":"TikTok: Make Every Second Count"
+    },
+    "short_id":"0",
+    "show_favorite_list":false,
+    "signature":"I’m dm’ing new followers on Instagram right now!!❤️❤️",
+    "signature_language":"en",
+    "sync_to_toutiao":0,
+    "tab_settings":{
+        "private_tab":{
+            "private_tab_style":1,
+            "show_private_tab":false
+        }
+    },
+    "total_favorited":807611740,
+    "twitter_id":"",
+    "twitter_name":"",
+    "uid":"7445731",
+    "unique_id":"brentrivera",
+    "verification_type":1,
+    "video_cover":{},
+    "video_icon":{
+        "uri":"",
+        "url_list":[]
+    },
+    "watch_status":false,
+    "with_commerce_enterprise_tab_entry":false,
+    "with_commerce_entry":false,
+    "with_fusion_shop_entry":false,
+    "with_new_goods":false,
+    "youtube_channel_id":"UC56D-IHcUvLVFTX_8NpQMXg",
+    "youtube_channel_title":"MrBrent98"
+}

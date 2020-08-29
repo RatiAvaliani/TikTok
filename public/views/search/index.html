@@ -1,0 +1,88 @@
+{% extends "./default/default.html" %}
+{% block head %}
+    <title>Search</title>
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="ad"></div>
+            </div>
+            <div class="col-md-8"> 
+                <div class="search">
+                    <h1 class="text-center mt-5 mb-2">Search Your Tags</h1>
+                    <div class="col-md-12">
+                        <h1></h1>
+                        <div class="search-tags">
+                            <ul>
+                                <li><a href="#">#tag</a></li>
+                                <li><a href="#">#tag</a></li>
+                                <li><a href="#">#tag</a></li>
+                                <li><a href="#">#tag</a></li>
+                                <li><a href="#">#tag</a></li>
+                                <li><a href="#">#tag</a></li>
+                                <li><a href="#">#tag</a></li>
+                                <li><a href="#">#tag</a></li>
+                                <li><a href="#">#tag</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="search-input">
+                            <form class="input-group mb-3" action="/hashtag/" method="get">
+                                <input type="text" class="form-control" placeholder="#tiktok #love #funny">
+                                <div class="input-group-append">
+                                    <button class="btn" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </div>
+                            </form> 
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <h4 class="mt-5">User</h4>
+                        <hr />
+                        <div class="search-user-list">
+                            <div class="item col-md-2">
+                                <div>
+                                    <img src="../uploads/UserCoversImages/6kM8NbAAdS.jpeg" alt="">
+                                    <span class="name">my name</span>
+                                </div>
+                                <div class="search-user-count">
+                                    <span class="harts-count"><i class="fa fa-heart" aria-hidden="true"></i> <span>100k</span></span>
+                                    <span class="video-count"><i class="fa fa-comments" aria-hidden="true"></i> <span>50k</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="mt-5">Videos</h4>
+                        <hr />
+                        <div class="row videos mb-5">
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <div class="card">
+                                    <a href="/post/{{ item.itemInfos.id }}">
+                                        <img class="card-img-top" src="../uploads/CoversImages/PgaKKtuaPP.jpeg" alt="{{ item.authorInfos.signature }}">
+                                    </a>
+    
+                                   <div class="card-body">
+                                       <div class="card-user">
+                                            <a href="/user/{{ item.authorInfos.userId }}">
+                                                <img src="../uploads/UserCoversImages/6kM8NbAAdS.jpeg" alt="{{ item.authorInfos.signature }}">
+                                                <span>asdasdasd asd asda s</span>
+                                            </a>
+                                       </div>
+                                       <div class="card-text">
+                                            <a href="/post/{{ item.itemInfos.id }}">
+                                                asdasdasd asd asd asd
+                                            </a>
+                                       </div>
+                                   </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="ad"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
