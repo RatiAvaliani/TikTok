@@ -10,50 +10,15 @@
             </div>
             <div class="col-md-8"> 
                 <div class="Tags">
-                    <h1 class="text-center mt-5 mb-2">Tags</h1>
                     <div class="col-md-12">
                         <h1></h1>
                         <div class="tags-list">
-                            <ul>
-                                <li><a href="#">#tag</a></li>
-                                <li><a href="#">#tag</a></li>
-                                <li><a href="#">#tag</a></li>
-                                <li><a href="#">#tag</a></li>
-                                <li><a href="#">#tag</a></li>
-                                <li><a href="#">#tag</a></li>
-                                <li><a href="#">#tag</a></li>
-                                <li><a href="#">#tag</a></li>
-                                <li><a href="#">#tag</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="col-md-12">
                             <div class="row">
-                                <i class="divider-line">Videos</i>
-                            </div>
-                        </div>
-                        <div class="row videos mb-5">
-                            <div class="col-sm-12 col-md-6 col-lg-3">
-                                <div class="card">
-                                    <a href="/post/{{ item.itemInfos.id }}">
-                                        <img class="card-img-top" src="../uploads/CoversImages/PgaKKtuaPP.jpeg" alt="{{ item.authorInfos.signature }}">
-                                    </a>
-    
-                                   <div class="card-body">
-                                       <div class="card-user">
-                                            <a href="/user/{{ item.authorInfos.userId }}">
-                                                <img src="../uploads/UserCoversImages/6kM8NbAAdS.jpeg" alt="{{ item.authorInfos.signature }}">
-                                                <span>asdasdasd asd asda s</span>
-                                            </a>
-                                       </div>
-                                       <div class="card-text">
-                                            <a href="/post/{{ item.itemInfos.id }}">
-                                                asdasdasd asd asd asd
-                                            </a>
-                                       </div>
-                                   </div>
-                                </div>
+                                {% for tag in Tags %}
+                                    <div class="col-sm-12 col-md-5 col-lg-3">
+                                        <a href="/hashtag/{{ tag.tag }}">#{{ tag.tag }}</a>
+                                    </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>

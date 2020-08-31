@@ -13,50 +13,17 @@
                         <h4 class="mt-5">Top Overlay Soundtrack</h4>
                         <hr />
                         <div class="top-overlay-soundtrak-list">
-                            <ul>
-                                <li>
-                                    <span class="top-overlay-soundtrak-title"><h5>title</h5></span>
-                                    <audio controls class="top-overlay-soundtrak-music"> 
-                                        <source src="horse.mp3" type="audio/mpeg">
-                                        Your browser does not support the audio element.
-                                    </audio>
-                                </li>
-                                <li>
-                                    <span class="top-overlay-soundtrak-title"><h5>title</h5></span>
-                                    <audio controls class="top-overlay-soundtrak-music"> 
-                                        <source src="horse.mp3" type="audio/mpeg">
-                                        Your browser does not support the audio element.
-                                    </audio>
-                                </li>
-                                <li>
-                                    <span class="top-overlay-soundtrak-title"><h5>title</h5></span>
-                                    <audio controls class="top-overlay-soundtrak-music"> 
-                                        <source src="horse.mp3" type="audio/mpeg">
-                                        Your browser does not support the audio element.
-                                    </audio>
-                                </li>
-                                <li>
-                                    <span class="top-overlay-soundtrak-title"><h5>title</h5></span>
-                                    <audio controls class="top-overlay-soundtrak-music"> 
-                                        <source src="horse.mp3" type="audio/mpeg">
-                                        Your browser does not support the audio element.
-                                    </audio>
-                                </li>
-                                <li>
-                                    <span class="top-overlay-soundtrak-title"><h5>title</h5></span>
-                                    <audio controls class="top-overlay-soundtrak-music"> 
-                                        <source src="horse.mp3" type="audio/mpeg">
-                                        Your browser does not support the audio element.
-                                    </audio>
-                                </li>
-                                <li>
-                                    <span class="top-overlay-soundtrak-title"><h5>title</h5></span>
-                                    <audio controls class="top-overlay-soundtrak-music"> 
-                                        <source src="horse.mp3" type="audio/mpeg">
-                                        Your browser does not support the audio element.
-                                    </audio>
-                                </li>
-                            </ul>
+                            <div class="row"> 
+                                {% for music in Music %}
+                                    <div class="col-md-12 col-lg-4 mt-5">
+                                        <span class="top-overlay-soundtrak-title"><h5>{{ music.musicName }}</h5></span>
+                                        <audio controls class="top-overlay-soundtrak-music"> 
+                                            <source src="{{ music.music }}" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                 </div>

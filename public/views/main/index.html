@@ -16,7 +16,7 @@
                             {% endfor %}
                         </ul>
                       
-                        <form class="input-group mb-3" action="/hashtag/" method="get">
+                        <form class="input-group mb-3" action="/Search" method="get">
                             <input type="text" class="form-control" placeholder="#tiktok #love #funny">
                             <div class="input-group-append">
                                 <button class="btn" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
@@ -41,34 +41,15 @@
         <div class="row">
             <div class="col-md-12"></div>
             <div class="col-md-2 mt-5"></div>
-            <div class="col-md-8 mt-5">
+            <div class="col-md-8 mt-5 mb-5">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="row">
-                            <i class="divider-line">music</i>
-                        </div>
+                        <h4 class="mt-5">Posts</h4>
+                        <hr />
                     </div>
                     {% for item in Hashtags %}
                         <div class="col-sm-12 col-md-6 col-lg-3 mt-5">
-                            <div class="card">
-                                <a href="/post/{{ item.itemInfos.id }}">
-                                    <img class="card-img-top" src="../uploads/Images/{{ item.itemInfos.shareCover }}" alt="{{ item.authorInfos.signature }}">
-                                </a>
-
-                               <div class="card-body">
-                                   <div class="card-user">
-                                        <a href="/user/{{ item.authorInfos.userId }}">
-                                            <img src="../uploads/Images/{{ item.authorInfos.coversMedium }}" alt="{{ item.authorInfos.signature }}">
-                                            <span>{{ item.authorInfos.nickName }}</span>
-                                        </a>
-                                   </div>
-                                   <div class="card-text">
-                                        <a href="/post/{{ item.itemInfos.id }}">
-                                            {{ item.itemInfos.text }}
-                                        </a>
-                                   </div>
-                               </div>
-                            </div>
+                            {% include 'modules/post.html' %}
                         </div>
                     {% endfor %}
                 </div>

@@ -8,18 +8,16 @@ const db = require('monk')('localhost/TikTok');
 class Main extends Controller {
     index (req, res) {
         (async () => {
-            let Tags = await Hashtag.mainTags
-            let Hashtags = await Hashtag.list;
+            let Tags = await Hashtag.HomeTags;
+            let HomeList = await Hashtag.HomeList;
             
-            let TopHashtags = await Hashtag.topList
-
             /*db.get('TopUsers').find({}).then((item) => {
                 item.forEach(element => {
-                    Hashtag.searchTag(element.name, [1, 2]);
+                    Hashtag.searchHomeTag(element.name);
                 });
             });*/
             
-            super.renderView('main/index', res, {"Hashtags": Hashtags, "Tags" : Tags});
+            super.renderView('main/index', res, {"Hashtags": HomeList, "Tags" : Tags});
         })();
     }
 }

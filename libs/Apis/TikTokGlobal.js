@@ -1,17 +1,17 @@
 const unrest = require('unirest');
 const db = require('monk')('localhost/TikTok');
-const assigningKeys = require('../assigningKeys');
 const dowuload = require('../../libs/download');
 const { music : ApiContent } = require('../../db/musicFeed');
 
 class TikTokGlobal {
     uri = 'https://tiktok-global.p.rapidapi.com/'
     urls = {
-        'HashtagFeed'    : `${this.uri}hashtag/feed`,
-        'HashtagInfo'    : `${this.uri}hashtag/info`,
-        "GlobalTranding" : `${this.uri}tranding`,
-        "UserInfo"       : `${this.uri}user/info`,
-        "Userfeed"       : `${this.uri}user/feed`
+        'HashtagFeed'     : `${this.uri}hashtag/feed`,
+        'HashtagFeedHome' : `${this.uri}hashtag/feed`,
+        'HashtagInfo'     : `${this.uri}hashtag/info`,
+        "GlobalTranding"  : `${this.uri}tranding`,
+        "UserInfo"        : `${this.uri}user/info`,
+        "Userfeed"        : `${this.uri}user/feed`
     }
     timeOut = {
         "default"  : 20
@@ -78,9 +78,14 @@ class TikTokGlobal {
     static FilterTags (string="") {
         if (string.trim() === "") return;
         let tags = string.match(/#[A-Za-z0-9\-\.\_]+/g);
-        
+        if (tags === null) return;
+
         tags.forEach(item => {
-            db.get('Tags').find({tag : item}).then(info => info.length === 0 ? db.get('Tags').insert({'tag' : item.substring(1)}) : 0);
+            db.get('Tags').find({'tag' : item}).then(info => {
+               if (info.length === 0) {
+                   db.get('Tags').insert({'tag' : item.substring(1)})
+               }
+            });
         });
 
         return tags;
@@ -89,7 +94,6 @@ class TikTokGlobal {
     /* 
         @DONE from `itemInfos` `text` needs to be filterd in FilterTags
         @DONE from `itemInfos` `covers` saved as an images
-        @DONE from `itemInfos` `shareCover` saved as an images
         @DONE from `itemInfos` `video` `urls` video needs to be saved  
             And `videoMeta` needs to be saved in one object in Document
 
@@ -103,87 +107,123 @@ class TikTokGlobal {
 
         @DONE from `authorStats` needs to be saved in Tow Documents (HashtagFeed And Users)
     */
-    FilterHashtagFeed (item) {
-        db.get('TopPosts ').find({"itemInfos.id" : item.itemInfos.id}).then(info =>  {
+    FilterHashtagFeed (item, isHomePage=false) {
+        db.get('Posts ').find({"id" : item.itemInfos.id}).then(info =>  {
             if (info.length === 0) {
-                item.itemInfos.tags = TikTokGlobal.FilterTags(item.itemInfos.text);
-               
-                item.itemInfos.covers = dowuload.Iamge(item.itemInfos.covers[0] === "" ? item.itemInfos.covers[1] : item.itemInfos.covers[0]);
-                item.itemInfos.shareCover = dowuload.Iamge(item.itemInfos.shareCover[0] === "" ? item.itemInfos.shareCover[1] : item.itemInfos.shareCover[0]);
+                let post = {};
+                let user = {}
+                let music = {};
 
-                let video = {
-                    'url' : dowuload.Video(item.itemInfos.video.urls[0] === '' ? item.itemInfos.video.urls[1] : item.itemInfos.video.urls[0]),
-                }
-                item.itemInfos.video = {...video, ...item.itemInfos.video.videoMeta}
-
-                item.authorInfos.coversMedium = dowuload.Iamge(item.authorInfos.coversMedium[0] === '' ? item.authorInfos.coversMedium[1] : item.authorInfos.coversMedium[0]);
-                item.authorInfos.authorStats = item.authorStats;
-
-                TikTokGlobal.saveUserInfo(item.authorInfos);
-
-                item.musicInfos.playUrl = dowuload.Music(item.musicInfos.playUrl[0] === '' ? item.musicInfos.playUrl[1] : item.musicInfos.playUrl[0]);
+                post.homePage = isHomePage;
+                post.image = dowuload.Iamge(item.itemInfos.covers[0] === "" ? item.itemInfos.covers[1] : item.itemInfos.covers[0]);
                 
-                TikTokGlobal.saveMusicInfo(item.musicInfos);
-                TikTokGlobal.saveChalengeInfo(item.challengeInfoList);
+                post.video = {
+                    "url" : dowuload.Video(item.itemInfos.video.urls[0] === '' ? item.itemInfos.video.urls[1] : item.itemInfos.video.urls[0]),
+                    "width" : item.itemInfos.video.videoMeta.width,
+                    "height" : item.itemInfos.video.videoMeta.height
+                };
+                post.id = item.itemInfos.id;
+                post.text = item.itemInfos.text;
+                post.createTime = new Date(item.itemInfos.createTime);
+                post.like = item.itemInfos.diggCount;
+                post.tags = TikTokGlobal.FilterTags(item.itemInfos.text);
 
-                //TikTokGlobal.saveTagedPosts(item, item.itemInfos.tags[0]);
-                db.get('TopPosts').insert(item);
+                user.image = dowuload.Iamge(item.authorInfos.coversMedium[0] === '' ? item.authorInfos.coversMedium[1] : item.authorInfos.coversMedium[0]);
+                user.followerCount = item.authorStats.followerCount;
+                user.heartCount = item.authorStats.heartCount;
+                user.followingCount = item.authorStats.followingCount;
+                user.videoCount = item.authorStats.videoCount;
+                user.username = item.authorInfos.nickName;
+                user.signature = item.authorInfos.signature;
+                user.id = item.authorInfos.userId;
+                user.uniqueId = item.authorInfos.uniqueId;
+
+                post.user = user;
+
+                music.id = item.musicInfos.musicId;
+                music.musicName = item.musicInfos.musicName;
+                music.authorName = item.musicInfos.authorName;
+                music.music = dowuload.Music(item.musicInfos.playUrl[0] === '' ? item.musicInfos.playUrl[1] : item.musicInfos.playUrl[0]);
+ 
+                TikTokGlobal.saveUserInfo(user);
+                TikTokGlobal.saveMusicInfo(music); 
+ 
+                db.get('Posts').insert(post);
             }
         });
     }
 
-    // @TODO save Conent based on tags
-    static saveTagedPosts (Content, Tag) {
-        db.get('TagedPosts').find({'info.itemInfos.id' : Content.itemInfos.id}).then(info => {
-           if (info.length === 0) {
-                db.get('TagedPosts').insert({
-                    tag: Tag,
-                    info: Content
-                });
-           }
-        });
-    } 
-
-    static insert (to, uniqId, Content)  {
-        db.get(to).find({uniqId : Content[uniqId]}).then(info => info.length === 0 ? db.get(to).insert(Content) : 0); 
+    static insert (to, Content)  {
+        db.get(to).find({'id' : Content['id']}).then(info => {
+            if (info.length === 0) {
+                db.get(to).insert(Content);
+            }
+        }); 
     }
 
     //@DONE save in Musci Document
     static saveMusicInfo (Content) {
-        TikTokGlobal.insert('MusicFeed', 'musicId', Content);
-    }
-
-    //@DONE save in Chalenges Doucument
-    static saveChalengeInfo (Content) {
-        Content.forEach(item => TikTokGlobal.insert('ChalengesFeed', 'challengeId', item));
+        TikTokGlobal.insert('Music', Content);
     }
 
     //@DONE save incoming info to users
     static saveUserInfo (Content) {
-        TikTokGlobal.insert('UserInfoFeed', 'userId', Content);
+        TikTokGlobal.insert('Users', Content);
     }
 
     //@DONE add info to User Feed
     static FilterUserFeed (Content) {
-        db.get('UserFeed').find({id : Content.id}).then(info => {
+        db.get('Users').find({id : Content.id}).then(info => {
+            if (info.length === 0) {
+                let user = {};
+                let music = {};
+
+                user.image = dowuload.Iamge(Content.author.avatarMedium);
+                user.username = Content.author.nickName;
+                user.signature = Content.author.signature;
+                user.id = Content.author.id;
+                user.uniqueId = Content.author.uniqueId;
+
+                music.id = Content.music.id;
+                music.musicName = Content.music.title;
+                music.authorName = Content.music.authorName;
+                music.music = dowuload.Music(Content.music.playUrl);
+
+                TikTokGlobal.saveMusicInfo(music);
+                db.get('Users').insert(Content);
+            }
+        });
+    }
+
+    static FilterUserInfo (Content) {
+        db.get('Users').find({id : Content.id}).then(info => {
             if (info.length === 0) {
                 TikTokGlobal.FilterTags(Content.desc);
-                Content.video.cover = dowuload.Iamge(Content.video.cover);
-                Content.video.playAddr = dowuload.Video(Content.video.playAddr);
-                Content.video.author.avatarMedium = dowuload.Image(Content.video.author.avatarMedium);
-                Content.video.music.playUrl = dowuload.Music(Content.video.music.playUrl);
+                let user = {};
+                
+                user.followerCount = Content.stats.followerCount;
+                user.heartCount = Content.stats.heartCount;
+                user.followingCount = Content.stats.followingCount;
+                user.videoCount = Content.stats.videoCount;
+                user.heart = Content.stats.heart;
 
-                db.get('UserFeed').insert(Content);
+                user.image = dowuload.Iamge(Content.user.avatarMedium);
+                user.username = Content.user.nickName;
+                user.signature = Content.user.signature;
+                user.id = Content.user.id;
+                user.uniqueId = Content.user.uniqueId;
+                
+                db.get('Users').insert(Content);
             }
         });
     }
 
     // @TODO test Content.data.body.hasMore 
-    HashtagFeed (Content=null, query) {
+    HashtagFeed (Content=null, query, isHomePage=false) {
         if (Content === null || Content.data.body === null || Content.data.body.itemListData === []) throw new Error ('Called Hastag Feed On Content Null');
     
         Content.data.body.itemListData.forEach((item, index) => { 
-            this.FilterHashtagFeed(item)
+            this.FilterHashtagFeed(item, isHomePage)
         })
         
         /*if (Content.data.body.hasMore === true) {
@@ -194,30 +234,27 @@ class TikTokGlobal {
         }*/
     }
 
-    UserInfo (Content) {
-        Content.data.userInfo.user.avatarMedium = dowuload.Iamge(Content.data.userInfo.user.avatarMedium);
-        let user = {...Content.data.userInfo.user, ...Content.data.userInfo.stats};
+    HashtagFeedHome (Content=null, query) {
+        this.HashtagFeed(Content, query, true);
+    }
 
-        db.get('UserInfo').find({'id' : user.id}).then(item => {
-            if (item.length === 0) {
-                db.get('UserInfo').insert(user);
-            }
-        });
+    UserInfo (Content) {
+        TikTokGlobal.FilterUserInfo(Content.data.userInfo);
     }
     
     UserFeed (Content) {
         Content.data.items.forEach(FilterUserFeed);
     }
 
-    Feed (to, query, forseUpdate=null, urlAddon=null) {
+    Feed (to, query , forseUpdate=null, urlAddon=null) {
         try {
             db.get('Timeout').findOne({'moduleName' : to}).then( (data) => {
                 if ( Math.abs(( new Date() ) - data.lastUpdate ) / 8.64e7 > 20 || forseUpdate !== null ) {
                     
                     let Request = this.SendRequest(to, query, urlAddon);
                     Request.end((res) => {
-                        if (res.error) throw new Error(res.error);
-                        if (res.body.errors) throw new Error(res.body.errors);
+                        if (res.error) return;
+                        if (res.body.errors) console.log('Api Error: ' + res.body.errors);
                         
                         // Calling the proper method based on `to` variable
                         this[to](res.body, query);

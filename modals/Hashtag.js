@@ -7,15 +7,24 @@ class Hashtag extends Modal {
         "Hashtag"    : "HashtagFeed",
         "TagedPosts" : "TagedPosts",
         "Tags"       : "Tags",
-        "TopPosts"   : "TopPosts"
+        "Posts"   : "Posts"
     };
 
-    searchTag (tag, cursor) {
+    searchByTag (tag, cursor=[1, 50]) {
         return Api.Feed('HashtagFeed', {
-            "count": "1000",
-            "tag_name" : tag, 
-            "minCursor": cursor[0],
-            "maxCursor": cursor[1]
+            "count"     : "1000",
+            "tag_name"  : tag, 
+            "minCursor" : cursor[0],
+            "maxCursor" : cursor[1]
+        }, true);
+    }
+
+    searchHomeTag (tag, cursor=[1, 50]) {
+        return Api.Feed('HashtagFeedHome', {
+            "count"     : "1000",
+            "tag_name"  : tag, 
+            "minCursor" : cursor[0],
+            "maxCursor" : cursor[1]
         }, true);
     }
 
@@ -25,16 +34,43 @@ class Hashtag extends Modal {
         });
     }
 
-    get list () {
-        return db.get(this.collection.Hashtag).find({});
+    simular (tag=null, id=null) {
+        return db.get(this.collection.Posts).find({
+            "text" : {$regex : `.*${tag}.*`},
+            "id"   : { $ne: id }
+        }, {limit: 20});
     }
 
-    get topList () {
-        return db.get(this.collection.TopPosts).find({});
+    byId (id=null) {
+        return db.get(this.collection.Posts).findOne({
+            "id" : id
+        });
+    }
+    
+    get list () {
+        return db.get(this.collection.Posts).find({});
+    }
+
+    get HomeList () {
+        return this.PostsList(50);
+    }
+
+    PostsList (limit) {
+        return db.get(this.collection.Posts).find({
+            "homePage" : true
+        }, {limit: limit});
+    }
+
+    get Tags () {
+        return db.get(this.collection.Tags).find();
+    }
+
+    get HomeTags () {
+        return db.get(this.collection.Tags).find({}, {limit: 20});
     }
 
     get tagList () {
-        return db.get(this.collection.TagedPosts).find({});
+        return db.get(this.collection.Tags).find({});
     }
 }
 

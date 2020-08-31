@@ -10,7 +10,8 @@
             </div>
             <div class="col-md-8"> 
                 <div class="search">
-                    <h1 class="text-center mt-5 mb-2">Search Your Tags</h1>
+                    <h4 class="mt-5">Search Your Tags</h4>
+                    <hr />
                     <div class="col-md-12">
                         <h1></h1>
                         <div class="search-tags">
@@ -29,8 +30,8 @@
                     </div>
                     <div class="col-md-12">
                         <div class="search-input">
-                            <form class="input-group mb-3" action="/hashtag/" method="get">
-                                <input type="text" class="form-control" placeholder="#tiktok #love #funny">
+                            <form class="input-group mb-3" action="/Search/" method="get">
+                                <input type="text" name="text" class="form-control" placeholder="#tiktok #love #funny">
                                 <div class="input-group-append">
                                     <button class="btn" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                                 </div>
@@ -41,9 +42,9 @@
                         <h4 class="mt-5">User</h4>
                         <hr />
                         <div class="search-user-list">
-                            <div class="item col-md-2">
+                            <div class="item col-sm-12 col-md-4 col-lg-2">
                                 <div>
-                                    <a href="#"><img src="../uploads/UserCoversImages/6kM8NbAAdS.jpeg" alt=""></a>
+                                    <a href="#"><img src="../uploads/UserCoversImages/6kM8NbAAdS.jpeg" onerror="this.src='../img/no-image.png';" alt=""></a>
                                     <span class="name"><a href="#">my name</a></span>
                                 </div>
                                 <div class="search-user-count">
@@ -58,13 +59,13 @@
                             <div class="col-sm-12 col-md-6 col-lg-3">
                                 <div class="card">
                                     <a href="/post/{{ item.itemInfos.id }}">
-                                        <img class="card-img-top" src="../uploads/CoversImages/PgaKKtuaPP.jpeg" alt="{{ item.authorInfos.signature }}">
+                                        <img class="card-img-top" src="../uploads/CoversImages/PgaKKtuaPP.jpeg" onerror="this.src='../img/no-image.png';" alt="{{ item.authorInfos.signature }}">
                                     </a>
     
                                    <div class="card-body">
                                        <div class="card-user">
                                             <a href="/user/{{ item.authorInfos.userId }}">
-                                                <img src="../uploads/UserCoversImages/6kM8NbAAdS.jpeg" alt="{{ item.authorInfos.signature }}">
+                                                <img src="../uploads/UserCoversImages/6kM8NbAAdS.jpeg" onerror="this.src='../img/no-image.png';" alt="{{ item.authorInfos.signature }}">
                                                 <span>asdasdasd asd asda s</span>
                                             </a>
                                        </div>

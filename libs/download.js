@@ -1,7 +1,8 @@
+const http = require('http');
 const fs = require('fs');
 const request = require('request');
 const randomString = require('randomstring');
-const downloader = require('downloader.js');
+var downloadfs = require('file-download')
 
 class download {
     static UploadTo = "public/assets/uploads/";
@@ -25,23 +26,36 @@ class download {
         let fineName = randomString.generate(10);
         let filePath = this.Uploads[category].url + fineName + this.Uploads[category].ending;
      
-        (async () => {
+        /*(async () => {
             await (new downloader (this.Uploads[category].url)).download({downloadLink: mediaUrl, filePath}).catch(console.error);
-        })();
+        })();*/
         
+        var options = {
+            directory: this.Uploads[category].url,
+            filename: fineName + this.Uploads[category].ending
+        }
+        
+        try {
+            (async () => {
+                await downloadfs(mediaUrl, options, err => console.error);
+            })();
+        } catch (err) {
+            throw err
+        }
+
         return fineName + this.Uploads[category].ending;
     }
 
     static Iamge (url) {
-        return this.downloadMedia('Image', url);
+        return download.downloadMedia('Image', url);
     }
     
     static Video (url) {
-        return this.downloadMedia('Video', url);
+        return download.downloadMedia('Video', url);
     }
     
     static Music (url) {
-        return this.downloadMedia('Music', url);
+        return download.downloadMedia('Music', url);
     }
 }
 

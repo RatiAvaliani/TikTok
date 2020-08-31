@@ -7,9 +7,9 @@ const Tag = require('../controllers/Tag');
 const RouterEx = require('../libs/RouterEx');
 
 RouterEx.set('/', Main.index);
-RouterEx.set('/Search/:id', Search.index); 
+RouterEx.set('/Search', Search.index); 
 RouterEx.set('/Post/:id', Post.index); 
-RouterEx.set('/User/:id', User.index); 
+RouterEx.set('/User/:id/:username', User.index); 
 RouterEx.set('/TopOverlaySoundtrack', TopOverlay.index); 
 RouterEx.set('/TopUser', User.top); 
 RouterEx.set('/Tag', Tag.index);

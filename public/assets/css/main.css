@@ -155,14 +155,49 @@ body  {
 
 /* Posts */
 
+.post-card-info {
+    top: 15px;
+    position: relative;
+    float: left;
+    width: 100%;
+}
+
+.post-card-info svg {
+    position: relative;
+    top: 2px;
+    left: 5px;
+}
+
+.post-card-info span:nth-child(2) svg {
+    color: #c30000;
+}
+
+.post-card-info span:nth-child(1) {
+    position: relative;
+    left: -5px;
+}
+
+.post-card-info span:nth-child(2) {
+    float: right;
+    position: relative;
+    left: -5px;
+}
+
+.post-card-info span:nth-child(1) svg {
+    color: #162447;
+}
+
+
 .post {
     padding-left: 35px;
     padding-bottom: 50px;
 }
 
+
 .post h1 {
     padding: 25px 0 25px 0;
 }
+
 
 .post .post-info {
     background-color: #f5f5f5;
@@ -170,6 +205,7 @@ body  {
     border-radius: 1%;
     display: flex;
     margin: 0 20px 20px 20px;
+    box-shadow: 5px 5px 5px #b3b3b3;
 }
 
 .post .post-content {
@@ -263,11 +299,14 @@ body  {
     margin: 0 20px;
     max-height: 47.7vh;
     overflow-x: auto;
+    box-shadow: 5px 5px 5px #b3b3b3;
 }
 
 .post .comments .comment-title {
     text-align: center;
-    background-color: #bdbdbd;
+    background-color: #162447;
+    border-bottom: 1px solid #808080;
+    color: #f5f5f5;
     border-radius: 1%;
 }
  
@@ -308,12 +347,12 @@ body  {
 
 /* tags */
 .tags-list {
-    text-align: center;
+    margin-top: 5%;
 }
 
 .tags-list ul {
     padding: 0;
-    display: flex;
+    display: inline-block;
     list-style: none;
 }
 
@@ -327,6 +366,10 @@ body  {
 
 .tags-list ul li a {
     color: #cc5e5e;
+}
+
+.tags-list ul li a:hover {
+    color: #162447;
 }
 
 .videos .card {
@@ -414,6 +457,9 @@ body  {
     position: relative;
     margin-top: 30px;
 }
+.owl-carousel .owl-item .card-body img {
+    width: 45px;
+}
 .owl-nav {
     position: absolute;
     top: -60px;
@@ -441,6 +487,10 @@ body  {
 
 /* top overlay soundtrak */
 
+.top-overlay-soundtrak h4 {
+    text-align: center;
+}
+
 .top-overlay-soundtrak ul {
     padding: 0;
 }
@@ -451,14 +501,85 @@ body  {
     float: left;
     padding-right: 20px;
     padding-bottom: 10px;
+    width: 240px;
 }
 
 .top-overlay-soundtrak .top-overlay-soundtrak-title {
-    display: flex;
     text-align: center;
-    margin-left: 37%;
 }
 
 .top-overlay-soundtrak .top-overlay-soundtrak-music {
-    width: 11.5vw;
+    width: 100%;
+}
+
+/* user */
+
+.user {
+    margin-top: 2%;
+}
+
+.user h1 {
+    margin-top: 3%;
+    margin-bottom: 2%;
+}
+
+.user .user-info {
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.user .user-image {
+    width: 120px;
+    height: 115px;
+    border-radius: 50%;
+    display: inline-block;
+    top: 10px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.user .user-name {
+    display: inline-block;
+    top: -20px;
+    left: 0px;
+    position: relative;
+}
+
+.user .user-hand {
+    position: relative;
+    display: inline-block;
+    left: -90px;
+    top: 10px;
+}
+
+.user .user-content {
+    padding: 0;
+    list-style: none;
+    position: relative;
+    top: 25px;
+    left: 25px;
+    display: flex;
+}
+
+.user .user-content li span.bold {
+    font-weight: 900;
+    color: #7f7c7c;
+}
+
+.user .user-content li {
+    position: relative;
+    padding-right: 30px;
+    font-size: 20px;
+    color: #000;
+}
+
+.user .user-text {
+    padding: 25px;
+}
+
+/* Tags */
+
+.Tags .tags-list ul li {
+    width: 15vw;
 }

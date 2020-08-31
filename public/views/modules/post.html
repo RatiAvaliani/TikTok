@@ -1,0 +1,34 @@
+
+<div class="card">
+    <a href="/post/{{ item.id }}"> 
+        <img class="card-img-top" onerror="this.src='../img/no-image.png';" src="../uploads/Images/{{ item.image }}" alt="{{ item.authorInfos.text }}">
+    </a>
+
+   <div class="card-body">
+       <div class="card-user">
+            <a href="/user/{{ item.user.id }}">
+                <img onerror="this.src='../img/no-image.png';" src="../uploads/Images/{{ item.user.image }}" alt="{{ item.user.signature }}">
+                <span>{{ item.user.username }}</span>
+            </a>
+       </div>
+       <div class="card-text">
+            <a href="/post/{{ item.id }}">
+                {{ item.text }}
+            </a>
+            <div class="post-card-info">
+                <span>
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                    </svg>
+                    {{ item.createTime }}
+                </span>
+                <span>
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                    </svg>
+                    {{ item.like | slice(0, 2) }}K
+                </span>
+            </div>
+       </div>
+   </div>
+</div>
