@@ -1,0 +1,44 @@
+{
+  "id": "6824578676303154438",
+  "text": "Want to reply to a comment with a video? Now you can! Available now for all users!",
+  "createTime": "1588971047",
+  "authorMeta": {
+    "id": "107955",
+    "secUid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM",
+    "name": "tiktok",
+    "nickName": "TikTok",
+    "avatar": "https://p16-sign-va.tiktokcdn.com/musically-maliva-obj/1645136815763462~c5_100x100.jpeg?x-expires=1602417600&x-signature=KfiFMXEZbCcRJM1omZbWWfvcvO8%3D",
+    "verified": true
+  },
+  "musicMeta": {
+    "musicId": "6824578672654256902",
+    "musicName": "original sound",
+    "musicAuthor": "TikTok",
+    "musicOriginal": false,
+    "playUrl": "",
+    "coverThumb": "",
+    "coverLarge": "",
+    "coverMedium": ""
+  },
+  "imageUrl": "https://p16-sign-va.tiktokcdn.com/obj/tos-maliva-p-0068/567eb540d7da45cc8aa7f74d18fc0b66_1588971049?x-expires=1602352800&x-signature=N88cYpmXteKHJwbhu7uF%2FoNJqKQ%3D",
+  "videoUrl": "https://v19-web-newkey.tiktokcdn.com/4ce53a1bed9eecab47a5acad8fc04562/5f8202fd/video/tos/useast2a/tos-useast2a-pve-0068/080266e5735245309b3b3468e2d7fc3e/?a=1988&br=1340&bt=670&cr=0&cs=0&cv=1&dr=0&ds=3&er=&l=202010101252150101890651400901BDC1&lr=tiktok_m&mime_type=video_mp4&qs=0&rc=M2hvZTZrb292dDMzNjczM0ApM2gzNmk6aWQ3N2gzNDk8NmdfNDA1cHE1X25fLS0yMTZzc2BjXzE0NjFeLmExYS4yNC46Yw%3D%3D&vl=&vr=",
+  "videoUrlNoWaterMark": "",
+  "videoMeta": {
+    "width": 576,
+    "height": 1024,
+    "ratio": 30,
+    "duration": 30
+  },
+  "covers": {
+    "default": "https://p16-sign-va.tiktokcdn.com/obj/tos-maliva-p-0068/ad2cdffefbb0e877b92bd2c958cf60fd?x-expires=1602352800&x-signature=GNf9GqnDDkguYl%2BMFVwWvgyVaoI%3D",
+    "dynamic": "",
+    "origin": "https://p16-sign-va.tiktokcdn.com/obj/tos-maliva-p-0068/567eb540d7da45cc8aa7f74d18fc0b66_1588971049?x-expires=1602352800&x-signature=N88cYpmXteKHJwbhu7uF%2FoNJqKQ%3D"
+  },
+  "diggCount": 4800000,
+  "shareCount": 80800,
+  "playCount": 48800000,
+  "commentCount": 491700,
+  "downloaded": false,
+  "mentions": [],
+  "hashtags": []
+}

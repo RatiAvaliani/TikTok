@@ -225,12 +225,7 @@ class TikTokGlobal {
             this.FilterHashtagFeed(item, isHomePage)
         })
         
-        /*if (Content.data.body.hasMore === true) {
-            query.minCursor = query.minCursor+1;
-            query.maxCursor = query.maxCursor+1;
-            
-            this.Feed('HashtagFeed', query, true);
-        }*/
+
     }
 
     HashtagFeedHome (Content=null, query) {
@@ -250,14 +245,14 @@ class TikTokGlobal {
             db.get('Timeout').findOne({'moduleName' : to}).then( (data) => {
                 if ( Math.abs(( new Date() ) - data.lastUpdate ) / 8.64e7 > 20 || forseUpdate !== null ) {
                     
-                    let Request = this.SendRequest(to, query, urlAddon);
+                    /*let Request = this.SendRequest(to, query, urlAddon);
                     Request.end((res) => {
                         if (res.error) return;
                         if (res.body.errors) console.log('Api Error: ' + res.body.errors);
                         
                         // Calling the proper method based on `to` variable
                         this[to](res.body, query);
-                    });
+                    });*/
                 }
             }).catch((e) => {
                 this.InsertTimeout(to);

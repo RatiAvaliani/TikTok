@@ -3,6 +3,9 @@ let loader = new TwingLoaderFilesystem('./public/views/');
 let twing = new TwingEnvironment(loader);
 
 class controller {
+    constructor () {
+
+    }
     renderView (file='index', res=null, variables={}) {
         if (res === null) throw new Error('When rendering view you need to pass response.');
 

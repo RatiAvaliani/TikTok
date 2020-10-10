@@ -1,7 +1,8 @@
 const unrest = require('unirest');
-const db = require('monk')('localhost/TikTok');
+//const db = require('monk')('localhost/TikTok');
+const db = require('./../DB');
 const dowuload = require('../../libs/download');
-const { music : ApiContent } = require('../../db/musicFeed');
+const { music : ApiContent } = {};//require('../../db/musicFeed')
 
 class TikTokGlobal {
     uri = 'https://tiktok-global.p.rapidapi.com/'
@@ -91,7 +92,7 @@ class TikTokGlobal {
         return tags;
     }
  
-    /* 
+    /*
         @DONE from `itemInfos` `text` needs to be filterd in FilterTags
         @DONE from `itemInfos` `covers` saved as an images
         @DONE from `itemInfos` `video` `urls` video needs to be saved  

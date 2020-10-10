@@ -1,0 +1,14 @@
+ *** Max Select Limit Is 200
+
+ *** Video Meta And Comments are selected using video link
+    ** https%3A%2F%2Fwww.tiktok.com%2F%40tiktok%2Fvideo%2F6824578676303154438
+
+ *** Test Data Path On TikTokSee.Co http://tiktoksee.co/testApiData/
+
+    TODO
+
+ *** Different api links are combined to same schemas but there needs to connection Like
+    ** if user followers are selected they need original userId as well
+
+ *** Selecting from DB or from api
+ *** Setting a global limit on Api use

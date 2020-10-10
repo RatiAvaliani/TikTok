@@ -8,4 +8,4 @@ app.use(express.static(__dirname + '/public/assets/'));
 
 Router.forEach(router => app.use(router.path, router.router));
 
-app.listen(80, () => console.log('Express App Is Running'));
+app.listen(3000, () => console.log('Express App Is Running'));

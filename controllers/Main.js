@@ -1,15 +1,15 @@
 const Controller = require('./Controller');
-const MusicModel = require('../modals/Music');
+/*const MusicModel = require('../modals/Music');
 const GlobalTranding = require('../modals/GlobalTranding');
 const Hashtag = require('../modals/Hashtag');
 const User = require('../modals/User');
-const db = require('monk')('localhost/TikTok');
+const db = require('monk')('localhost/TikTok');*/
 
 class Main extends Controller {
     index (req, res) {
         (async () => {
-            let Tags = await Hashtag.HomeTags;
-            let HomeList = await Hashtag.HomeList;
+            /*let Tags = await Hashtag.HomeTags;
+            let HomeList = await Hashtag.HomeList;*/
             
             /*db.get('TopUsers').find({}).then((item) => {
                 item.forEach(element => {
@@ -17,7 +17,7 @@ class Main extends Controller {
                 });
             });*/
             
-            super.renderView('main/index', res, {"Hashtags": HomeList, "Tags" : Tags});
+            super.renderView('main/index', res, {"Hashtags": {}, "Tags" : {}});
         })();
     }
 }
